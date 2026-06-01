@@ -1,5 +1,16 @@
 const STORAGE_KEY = "lab1_items";
 let items = loadFromStorage();
+let sortField = 'date'; 
+let sortOrder = 'asc';
+function handleSort(field) {
+    if (sortField === field) {
+        sortOrder = (sortOrder === 'asc') ? 'desc' : 'asc';
+    } else {
+        sortField = field;
+        sortOrder = 'asc';
+    }
+renderTable(); 
+}
 let editingId = null;
 const form = document.getElementById("incidentForm");
 const tbody = document.getElementById("itemsTableBody");
@@ -106,13 +117,14 @@ function startEdit(id) {
     if (!item) return;
     editingId = id;
     formTitle.textContent = "Редагувати інцидент";
-    submitBtn.textContent = "Зберегти";
+    submitBtn.textContent = "Зберегти";           
+    
     document.getElementById("reporterInput").value = item.reporter;
     document.getElementById("dateInput").value = item.date;
     document.getElementById("tagSelect").value = item.tag;
     document.getElementById("severitySelect").value = item.severity;
     document.getElementById("commentsInput").value = item.comments;
-    clearErrors();
+    renderTable(); 
     window.scrollTo(0, 0);
 }
 function saveToStorage(arr) {
@@ -151,28 +163,28 @@ function resetForm() {
 function renderTable() {
     let rawItems = [...items];
     const severityFilter = filterSeverity.value;
-    if (severityFilter !== "All") {
-    rawItems = rawItems.filter(item => item.severity === severityFilter);
+    if (severityFilter !== "All" && severityFilter !== "all") {
+        rawItems = rawItems.filter(item => item.severity === severityFilter);
     }
-    const dateSort = sortDate.value;
-    if (dateSort === "asc") {
-      rawItems.sort((a, b) => a.date.localeCompare(b.date));
-     } else if (dateSort === "desc") {
-      rawItems.sort((a, b) => b.date.localeCompare(a.date));
-     }
-     const rowsHtml = rawItems.map((item, index) => `
-        <tr>
-            <td>${index + 1}</td>
-            <td>${item.reporter}</td>
-            <td>${item.date}</td>
-            <td>${item.tag}</td>
-            <td>${item.severity}</td>
-            <td>${item.comments}</td>
-            <td>
-               <button type="button" class="edit-btn" data-id="${item.id}">Редагувати</button>
-              <button type="button" class="delete-btn" data-id="${item.id}">Видалити</button>
-           </td>
-      </tr>
-    `).join("");
+    const rowsHtml = rawItems.map((item) => {
+        let rowClass = "";
+        if (item.id === editingId) {
+            rowClass = "row-editing-green"; 
+        }
+        return `
+            <tr class="${rowClass}">
+                <td>${item.id}</td>
+                <td>${item.date}</td>
+                <td>${item.tag}</td>
+                <td>${item.severity}</td>
+                <td>${item.reporter}</td>
+                <td>${item.comments}</td>
+                <td>
+                    <button type="button" class="edit-btn" data-id="${item.id}">Редагувати</button>
+                    <button type="button" class="delete-btn" data-id="${item.id}">Видалити</button>
+                </td>
+            </tr>
+        `;
+    }).join("");
     tbody.innerHTML = rowsHtml;
-}                                                                                                                                                                              
+}

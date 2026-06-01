@@ -1,3 +1,4 @@
+
 body {
     font-family: Arial, sans-serif;
     background-color: #fff;
@@ -35,30 +36,60 @@ select,
 textarea {
     box-sizing: border-box;
     width: 100%;
-    padding: 5px;
+    padding: 8px; 
     border: 1px solid #999;
+    border-radius: 4px; 
 }
 input.invalid,
 select.invalid,
 textarea.invalid {
-    border: 1px solid red; 
+    border: 1px solid rgb(246, 212, 133); 
 }
 .error-msg {
     display: block;
-    color: red;
+    color: rgb(246, 212, 133);
     font-size: 12px;
     margin-top: 2px;
     min-height: 15px;
 }
-.form-actions {
-    margin-top: 15px;
-}
-button {
-    padding: 5px 15px;
+button, .btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;      
     cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease; 
 }
-.btn-small {
-    padding: 2px 5px;
+.btn-primary {
+    background-color: #f99e7f !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: #27ae60 !important;
+    transform: translateY(-2px);
+}
+.btn-secondary {
+    background-color: #95a5a6 !important;
+    color: white !important;
+}
+.btn-secondary:hover {
+    background-color: #7f8c8d !important;
+}
+.edit-btn, .delete-btn {
+    border-radius: 15px;
+    padding: 5px 12px;
+    margin: 2px;
+    font-size: 12px;
+}
+.edit-btn {
+    background-color: #f99e7f !important;
+    color: white !important;
+}
+.delete-btn {
+    background-color: #d0ccca !important;
+    color: white !important;
 }
 .controls-bar {
     border: 1px solid #ccc;
@@ -79,22 +110,24 @@ table {
     width: 100%;
     border-collapse: collapse;
 }
-th,
-td {
+th, td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
 }
 th {
-    background-color: #eee;
+    background-color: #eeeeee; 
 }
-.empty-state {
-    text-align: center;
-    padding: 20px;
-    font-style: italic;
-    border: 1px dashed #ccc;
-    margin-top: 10px;
+tbody tr:nth-child(odd) {
+    background-color: #f2e0ff !important;
 }
-.hidden {
-    display: none;
+tbody tr:nth-child(even) {
+    background-color: #e5c0f7 !important; 
+}
+tbody tr.row-editing-green {
+    background-color: #2ecc71 !important; 
+    color: white !important;
+    font-weight: bold;
+    outline: 2px solid #27ae60 !important; 
+    border: none;
 }
