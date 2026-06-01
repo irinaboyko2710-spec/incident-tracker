@@ -1,18 +1,29 @@
-const service = require('../services/users.service');
-const { UserResponseDto } = require('../dtos/users.dto');
-class UsersController {
-    getAll(req, res) {
-        const users = service.getAll().map(user => new UserResponseDto(user));
-        res.json(users);
-    }
-    getOne(req, res) {
-        const user = service.getById(parseInt(req.params.id));
-        if (!user) {
-            return res.status(404).json({ 
-                error: { code: "NOT_FOUND", message: "Користувача не знайдено" } 
-            });
+const userService = require('../services/users.service');
+class UserController {
+    getAll = async (req, res, next) => {
+        try {
+            const users = await userService.getAllUsers();
+            res.json(users);
+        } catch (error) {
+            next(error);
         }
-        res.json(new UserResponseDto(user));
+    }
+    create = async (req, res, next) => {
+        try {
+            const newUser = await userService.createUser(req.body);
+            res.status(201).json(newUser);
+        } catch (error) {
+            next(error);
+        }
+    }
+    getOne = async (req, res, next) => {
+        try {
+            const user = await userService.getUserById(req.params.id);
+            if (!user) return res.status(404).json({ message: "Не знайдено" });
+            res.json(user);
+        } catch (error) {
+            next(error);
+        }
     }
 }
-module.exports = new UsersController();
+module.exports = new UserController();

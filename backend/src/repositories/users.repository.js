@@ -1,14 +1,43 @@
-class UsersRepository {
-    constructor() {
-        this.users = [
-            { id: 1, name: "Irina Boiko", role: "Admin", email: "irina@cyber.local" }
-        ];
+const db = require('../db/db');
+class UserRepository {
+    findAll() {
+        return new Promise((resolve, reject) => {
+            db.all("SELECT * FROM users", [], (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows);
+            });
+        });
     }
-    findAll() { return this.users; }
+    findById(id) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT * FROM users WHERE id = ${id}`;
+            db.get(sql, (err, row) => {
+                if (err) reject(err);
+                else resolve(row);
+            });
+        });
+    }
     create(data) {
-        const newUser = { id: Date.now(), ...data };
-        this.users.push(newUser);
-        return newUser;
+        return new Promise((resolve, reject) => {
+            const { username, full_name } = data;
+            // Просто вставляємо змінні в рядок через шаблони ``
+            const sql = `INSERT INTO users (username, full_name) 
+                         VALUES ('${username}', '${full_name}')`;
+            
+            db.run(sql, function(err) {
+                if (err) reject(err);
+                else resolve({ id: this.lastID, ...data });
+            });
+        });
+    }
+    delete(id) {
+        return new Promise((resolve, reject) => {
+            const sql = `DELETE FROM users WHERE id = ${id}`;
+            db.run(sql, function(err) {
+                if (err) reject(err);
+                else resolve({ deleted: this.changes });
+            });
+        });
     }
 }
-module.exports = new UsersRepository();
+module.exports = new UserRepository();

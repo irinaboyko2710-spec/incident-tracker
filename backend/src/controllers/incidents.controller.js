@@ -1,26 +1,45 @@
-const service = require('../services/incidents.service');
-class IncidentsController {
-    getAll(req, res) {
-        const items = service.getAll(req.query || {});
-        res.json(items);
+const incidentService = require('../services/incidents.service');
+class IncidentController {
+    getAll = async (req, res, next) => {
+        try {
+            const incidents = await incidentService.getAllIncidents();
+            res.json(incidents);
+        } catch (error) {
+            next(error);
+        }
     }
-    getOne(req, res) {
-        const id = parseInt(req.params.id);
-        const item = service.getById(id);
-        if (!item) return res.status(404).json({ error: "Інцидент не знайдено" });
-        res.json(item);
+    create = async (req, res, next) => {
+        try {
+            const newIncident = await incidentService.createIncident(req.body);
+            res.status(201).json(newIncident);
+        } catch (error) {
+            next(error);
+        }
     }
-    create(req, res) {
-        const newItem = service.create(req.body);
-        res.status(201).json(newItem);
+    getOne = async (req, res, next) => {
+        try {
+            const item = await incidentService.getIncidentById(req.params.id);
+            if (!item) return res.status(404).json({ message: "Не знайдено" });
+            res.json(item);
+        } catch (error) {
+            next(error);
+        }
     }
-    update(req, res) {
-        res.json({ message: `Інцидент ${req.params.id} оновлено` });
+    update = async (req, res, next) => {
+        try {
+            const updated = await incidentService.updateIncident(req.params.id, req.body);
+            res.json(updated);
+        } catch (error) {
+            next(error);
+        }
     }
-    delete(req, res) {
-        const success = service.delete(parseInt(req.params.id));
-        if (!success) return res.status(404).json({ error: "Не вдалося видалити" });
-        res.json({ message: "Видалено успішно" });
+    delete = async (req, res, next) => {
+        try {
+            const result = await incidentService.deleteIncident(req.params.id);
+            res.json(result);
+        } catch (error) {
+            next(error);
+        }
     }
 }
-module.exports = new IncidentsController();
+module.exports = new IncidentController();
