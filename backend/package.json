@@ -1,0 +1,17 @@
+{
+  "name": "iryna-boiko-lab2",
+  "version": "0.2.0",
+  "description": "Backend API для відстеження кіберінцидентів",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "author": "Irina Boiko",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^6.0.1"
+  }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Трекер інцидентів</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="dist/main.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>Трекер інцидентів кібербезпеки (Варіант 2)</h1>
+    </header>
+
+    <div class="container">
+        <section id="create-section">
+            <h2>Додати інцидент</h2>
+            <form id="incidentForm">
+                <div class="field">
+                    <label for="reporterInput">Заявник (Reporter):</label>
+                    <input type="text" id="reporterInput" placeholder="ПІБ або логін">
+                </div>
+
+                <div class="field">
+                    <label for="dateInput">Дата та час (Date):</label>
+                    <input type="datetime-local" id="dateInput">
+                </div>
+
+                <div class="field">
+    <label for="tagSelect">Тег (Tag):</label>
+    <select id="tagSelect">
+        <option value="" disabled selected>Оберіть тег</option>
+        <option value="Фішинг (Phishing)">Фішинг </option>
+        <option value="Шкідливе ПЗ (Malware)">Шкідливе ПЗ </option>
+        <option value="DDoS-атака">DDoS-атака</option>
+        <option value="Витік даних">Витік даних</option>
+        <option value="Несанкціонований доступ">Несанкціонований доступ</option>
+        <option value="Інше">Інше</option>
+    </select>
+</div>
+                <div class="field">
+                    <label for="severitySelect">Критичність (Severity):</label>
+                    <select id="severitySelect">
+                        <option value="" disabled selected>Оберіть рівень</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                        <option value="Critical">Critical</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="commentsInput">Коментар (Comments):</label>
+                    <textarea id="commentsInput" placeholder="Детальний опис інциденту..."></textarea>
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" id="submitBtn">Зберегти</button>
+                    <button type="reset">Очистити</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="list-section">
+    <h2>Список інцидентів</h2>
+    
+    <div id="controls">
+        <input type="text" id="searchInput" placeholder="Пошук за заявником...">
+        
+        <select id="severityFilter">
+            <option value="all">Всі рівні</option>
+            <option value="Low">Низький</option>
+            <option value="Medium">Середній</option>
+            <option value="High">Високий</option>
+            <option value="Critical">Критичний</option>
+        </select>
+        
+        <select id="sortOrder">
+            <option value="desc">За замовчуванням (найновіші)</option>
+            <option value="asc">Від найстаріших</option>
+        </select>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Дата</th>
+                <th>Тег</th>
+                <th>Критичність</th>
+                <th>Заявник</th>
+                <th>Коментар</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody id="itemsTableBody">
+            </tbody>
+    </table>
+    <div id="emptyState" class="hidden">Записів поки немає...</div>
+</section>
+
+</body>
+</html>
