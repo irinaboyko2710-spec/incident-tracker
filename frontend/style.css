@@ -1,0 +1,134 @@
+/* --- Загальні стилі сторінки --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #000;
+    margin: 0;
+    padding: 20px;
+}
+header {
+    margin-bottom: 20px;
+}
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input[type="text"],
+input[type="datetime-local"],
+select,
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px; 
+    border: 1px solid #999;
+    border-radius: 4px; 
+}
+input.invalid,
+select.invalid,
+textarea.invalid {
+    border: 1px solid rgb(246, 212, 133); 
+}
+.error-msg {
+    display: block;
+    color: rgb(246, 212, 133);
+    font-size: 12px;
+    margin-top: 2px;
+    min-height: 15px;
+}
+button, .btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;      
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease; 
+}
+.btn-primary {
+    background-color: #f99e7f !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: #27ae60 !important;
+    transform: translateY(-2px);
+}
+.btn-secondary {
+    background-color: #95a5a6 !important;
+    color: white !important;
+}
+.btn-secondary:hover {
+    background-color: #7f8c8d !important;
+}
+.edit-btn, .delete-btn {
+    border-radius: 15px;
+    padding: 5px 12px;
+    margin: 2px;
+    font-size: 12px;
+}
+.edit-btn {
+    background-color: #f99e7f !important;
+    color: white !important;
+}
+.delete-btn {
+    background-color: #d0ccca !important;
+    color: white !important;
+}
+.controls-bar {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.control-group {
+    display: flex;
+    flex-direction: column;
+}
+.control-group label {
+    font-size: 14px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #eeeeee; 
+}
+tbody tr:nth-child(odd) {
+    background-color: #f2e0ff !important;
+}
+tbody tr:nth-child(even) {
+    background-color: #e5c0f7 !important; 
+}
+tbody tr.row-editing-green {
+    background-color: #2ecc71 !important; 
+    color: white !important;
+    font-weight: bold;
+    outline: 2px solid #27ae60 !important; 
+    border: none;
+}
