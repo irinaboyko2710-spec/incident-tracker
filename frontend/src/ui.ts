@@ -37,7 +37,6 @@ export const ui = {
             btn.onclick = () => (window as any).deleteIncident(item.id);
             actionsCell.appendChild(btn);
             row.appendChild(actionsCell);
-
             tbody.appendChild(row);
         });
     }

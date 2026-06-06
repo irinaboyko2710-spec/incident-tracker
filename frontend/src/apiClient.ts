@@ -1,12 +1,8 @@
 import { IncidentDTO, ApiError } from './dtos.js';
-
 const API_URL = "http://localhost:3000/api/v1/incidents";
-
 export const apiClient = {
     async getAll(): Promise<IncidentDTO[]> {
-        // ДОДАЄМО ЦЕЙ РЯДОК
         console.log("Спроба отримати дані з сервера..."); 
-
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); 
         try {
@@ -16,9 +12,7 @@ export const apiClient = {
             if (!response.ok) {
                 throw await this.formatError(response);
             }
-
             const data = await response.json();
-            // ДОДАЄМО ЦЕЙ РЯДОК
             console.log("Дані отримано:", data); 
 
             return data;
@@ -26,7 +20,6 @@ export const apiClient = {
             throw this.handleNetworkError(err);
         }
     },
-
     async create(data: IncidentDTO): Promise<IncidentDTO> {
         console.log("Надсилання нового інциденту на сервер...", data);
 
@@ -67,7 +60,6 @@ export const apiClient = {
             throw this.handleNetworkError(err);
         }
     },
-
     async formatError(response: Response): Promise<ApiError> {
         const data = await response.json().catch(() => ({}));
         return {
@@ -76,7 +68,6 @@ export const apiClient = {
             detail: data.message || data.detail || "Щось пішло не так"
         };
     },
-
     handleNetworkError(err: any): ApiError {
         if (err.name === 'AbortError') {
             return { status: 408, title: "Таймаут", detail: "Сервер занадто довго не відповідав" };

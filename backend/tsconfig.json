@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "rootDir": "./src",
+    "module": "CommonJS",
     "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "lib": ["DOM", "ESNext"]
+    "skipLibCheck": true
   },
   "include": ["src/**/*"]
 }
